@@ -1,0 +1,147 @@
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    color: #2d3748;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #f7fafc;
+}
+
+/* Typography */
+h1, h2, h3 {
+    color: #1a365d;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 0.5rem;
+}
+
+/* Upload Section */
+.upload-section {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+input[type="file"] {
+    padding: 0.5rem;
+    margin-right: 1rem;
+}
+
+button {
+    background-color: #4299e1;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: #3182ce;
+}
+
+/* Analysis Section */
+.analysis-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+/* Safety Rating Styles */
+.safety-rating {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #38a169;
+    display: block;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+/* Badge Styles */
+.badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.badge-low-risk {
+    background-color: #faf089;
+    color: #744210;
+}
+
+/* Lists */
+ul {
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+li strong {
+    color: #2c5282;
+}
+
+/* Consumption Recommendation */
+.card:last-child {
+    grid-column: 1 / -1;
+    background-color: #ebf8ff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+    
+    .analysis-section {
+        grid-template-columns: 1fr;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .upload-section {
+        padding: 1.5rem;
+    }
+    
+    input[type="file"] {
+        margin-bottom: 1rem;
+        margin-right: 0;
+    }
+}
