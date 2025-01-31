@@ -48,7 +48,7 @@ else:
 user_prompt = input("Enter your question about the image: ")
 
 try:
-    model = genai.GenerativeModel('gemini-pro-vision')
+    model = genai.GenerativeModel('gemini-1.5-flash')
 
     # Create the image object as a dictionary
     image_obj = {
@@ -56,9 +56,10 @@ try:
         "data": image_data
     }
 
-    response = model.generate(
-        prompt=user_prompt,
-        image=image_obj  # Pass the image dictionary directly
+    response = model.generate_content(
+      [  user_prompt,
+        image_obj  # Pass the image dictionary directly  
+      ]
     )
 
     if response.candidates:
