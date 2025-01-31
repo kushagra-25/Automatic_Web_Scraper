@@ -42,23 +42,21 @@ def analyze_image():
         mime_type = get_mime_type(image_file.filename)
         if not mime_type:
             return jsonify({"error": "Unsupported image format"}), 400
-
         # Call the Google Generative AI API
-        model = genai.GenerativeModel('gemini-1.5-flash')
-        image_obj = {
+        model = genai.GenerativeModel('gemini-1.5-flash')  # Use the correct model name
+        image_obj = {response.text
             "mime_type": mime_type,
             "data": image_data
         }
 
+        # Generate content using the correct method
         response = model.generate_content([user_prompt, image_obj])
 
-        if response.candidates:
-            return jsonify({
-                "response": response.candidates[0].content
-            }), 200
-        else:
-            return jsonify({"error": "No response from the model"}), 500
-
+        # Return the response
+        return jsonify({
+            "response": response.text
+        }), 200
+        
     except Exception as e:
         print(f"An error occurred: {e}")
         error_details = json.loads(e.args[1]) if len(e.args) > 1 and e.args[1] else None
