@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafetyCheck</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #f7fafc;
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            overflow-x: hidden;
+        }
+
+        /* Header Section */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: #1a2980;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #f7fafc;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-icons a {
+            text-decoration: none;
+            color: #f7fafc;
+            font-size: 1rem;
+        }
+
+        /* Main Content */
+        .main-container {
+            display: flex;
+            height: calc(100vh - 60px);
+        }
+
+        .left-side {
+            width: 20%;
+            background-color: #1a2980;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .right-side {
+            width: 80%;
+            padding: 2rem;
+            background-color: #26d0ce;
+            color: #f7fafc;
+        }
+
+        /* Upload Section */
+        .upload-section {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #2d3748;
+        }
+
+        input[type="file"] {
+            padding: 0.5rem;
+            margin-right: 1rem;
+        }
+
+        button {
+            background-color: #4299e1;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #3182ce;
+        }
+
+        /* Analysis Section */
+        .analysis-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+            color: #2d3748;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Login & Signup Pages */
+        .auth-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #1a2980;
+        }
+
+        .auth-form {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            color: #2d3748;
+        }
+
+        .auth-form input {
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .auth-form button {
+            background-color: #4299e1;
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .left-side {
+                width: 100%;
+                height: auto;
+            }
+
+            .right-side {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">SafetyCheck</div>
+        <div class="nav-icons">
+            <a href="#profile">Profile</a>
+            <a href="#about-us">About Us</a>
+            <a href="#plans">Plans</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Left Side -->
+        <div class="left-side">
+            <img src="your-logo.png" alt="Logo" style="width: 100px; height: auto;">
+            <p>Welcome to SafetyCheck</p>
+        </div>
+
+        <!-- Right Side -->
+        <div class="right-side">
+            <h1>SafetyCheck</h1>
+            <div class="upload-section">
+                <h2>Upload Product Image</h2>
+                <input type="file" accept="image/*" id="productImage">
+                <button onclick="analyzeProduct()">Analyze Product</button>
+            </div>
+            <div class="analysis-section" id="analysisResults" style="display: none;">
+                <div class="card">
+                    <h2>Ingredients</h2>
+                    <ul>
+                        <li>Water</li>
+                        <li>Sugar</li>
+                        <li>Natural Flavors</li>
+                        <li>Citric Acid</li>
+                        <li>Sodium Benzoate (Preservative)</li>
+                        <li>Caramel Color</li>
+                        <li>Phosphoric Acid</li>
+                        <li>Caffeine</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h2>Safety Analysis</h2>
+                    <p>Safety Level: <span class="badge badge-low-risk">Low Risk</span></p>
+                    <p>Safety Rating: <span class="safety-rating">7.5 / 10</span></p>
+                    <h3>Scale:</h3>
+                    <ul>
+                        <li>Safe: 9.0 - 10.0</li>
+                        <li>Low Risk: 7.0 - 8.9</li>
+                        <li>Moderate Risk: 5.0 - 6.9</li>
+                        <li>High Risk: 0.0 - 4.9</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h2>Hazardous Ingredients</h2>
+                    <ul>
+                        <li><strong>Sodium Benzoate:</strong> Potential allergic reactions</li>
+                        <li><strong>Phosphoric Acid:</strong> May weaken bones</li>
+                        <li><strong>Caffeine:</strong> Insomnia and anxiety</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h2>Safety Rating Reasons</h2>
+                    <ul>
+                        <li>Common food additives</li>
+                        <li>Moderate sugar content</li>
+                        <li>Presence of caffeine</li>
+                        <li>Artificial preservatives used</li>
+                        <li>No severe health hazards</li>
+                    </ul>
+                </div>
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h2>Consumption Recommendation</h2>
+                    <p><strong>Recommended frequency:</strong> 4-6 times per month</p>
+                    <p>This recommendation is based on the product's ingredients and safety analysis. Moderation is key to minimizing potential health risks.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Page -->
+    <div id="loginPage" class="auth-page" style="display: none;">
+        <form class="auth-form" onsubmit="return false;">
+            <h2>Login</h2>
+            <input type="text" placeholder="Username" required>
+            <input type="password" placeholder="Password" required>
+            <button onclick="redirectToMain()">Login</button>
+        </form>
+    </div>
+
+    <!-- Signup Page -->
+    <div id="signupPage" class="auth-page" style="display: none;">
+        <form class="auth-form" onsubmit="return false;">
+            <h2>Sign Up</h2>
+            <input type="text" placeholder="Full Name" required>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <button onclick="redirectToMain()">Sign Up</button>
+        </form>
+    </div>
+
+    <script>
+        function analyzeProduct() {
+            // Simulate analysis process
+            setTimeout(() => {
+                document.getElementById('analysisResults').style.display = 'grid';
+            }, 2000);
+        }
+
+        function redirectToMain() {
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('signupPage').style.display = 'none';
+            document.querySelector('.main-container').style.display = 'flex';
+        }
+
+        function showLoginPage() {
+            document.querySelector('.main-container').style.display = 'none';
+            document.getElementById('loginPage').style.display = 'flex';
+        }
+
+        function showSignupPage() {
+            document.querySelector('.main-container').style.display = 'none';
+            document.getElementById('signupPage').style.display = 'flex';
+        }
+
+        function signOut() {
+            document.querySelector('.main-container').style.display = 'none';
+            document.getElementById('loginPage').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
