@@ -3,54 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Safety Analyzer</title>
+    <title>SafetyCheck</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
     body {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         line-height: 1.6;
-        color: #2d3748;
+        color: #e2e8f0;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+        background-blend-mode: overlay;
+    }
+
+    /* Header Styles */
+    .header {
+        background: rgba(26, 32, 44, 0.95);
+        padding: 1rem 0;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 2rem;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        width: 180px;
+        height: 50px;
+        background: url("logo.jpg");
+        background-size: contain;
+    }
+
+    .logo-text {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #e2e8f0;
+    }
+
+    .nav-icons {
+        display: flex;
+        gap: 2rem;
+        height: 100%;
+    }
+
+    .nav-icon {
+        color: #e2e8f0;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        height: 100%;
+    }
+
+    .nav-icon:hover {
+        color: #4299e1;
+    }
+
+    /* Pages Container */
+    .page {
+        display: none;
+        padding: 80px 2rem 2rem;
         max-width: 1000px;
         margin: 0 auto;
-        padding: 2rem;
-        background-color: #f7fafc;
     }
-    
-    /* Typography */
+
+    .page.active {
+        display: block;
+    }
+
+    /* Login/Signup Styles */
+    .auth-form {
+        background: #2d3748;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        max-width: 400px;
+        margin: 2rem auto;
+    }
+
+    .auth-form input {
+        width: 100%;
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+        border: 1px solid #4a5568;
+        border-radius: 5px;
+        background: #1a202c;
+        color: #e2e8f0;
+    }
+
+    .auth-form a {
+        color: #4299e1;
+        text-decoration: none;
+    }
+
+    .auth-form a:hover {
+        text-decoration: underline;
+    }
+
+    /* Upload Section */
+    .upload-section {
+        background-color: #2d3748;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .analysis-section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .card {
+        background-color: #2d3748;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
     h1, h2, h3 {
-        color: #1a365d;
+        color: #4299e1;
         margin-bottom: 1rem;
     }
-    
+
     h1 {
         font-size: 2.5rem;
         text-align: center;
         margin-bottom: 2rem;
     }
-    
+
     h2 {
         font-size: 1.5rem;
-        border-bottom: 2px solid #e2e8f0;
+        border-bottom: 2px solid #4a5568;
         padding-bottom: 0.5rem;
     }
-    
-    /* Upload Section */
-    .upload-section {
-        background-color: white;
-        padding: 2rem;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        margin-bottom: 2rem;
-        text-align: center;
-    }
-    
-    input[type="file"] {
-        padding: 0.5rem;
-        margin-right: 1rem;
-    }
-    
+
     button {
         background-color: #4299e1;
-        color: white;
+        color: #e2e8f0;
         border: none;
         padding: 0.75rem 1.5rem;
         border-radius: 5px;
@@ -58,42 +162,20 @@
         font-weight: 600;
         transition: background-color 0.2s ease;
     }
-    
+
     button:hover {
         background-color: #3182ce;
     }
-    
-    /* Analysis Section */
-    .analysis-section {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 1.5rem;
-        margin-top: 2rem;
-    }
-    
-    .card {
-        background-color: white;
-        border-radius: 10px;
-        padding: 1.5rem;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s ease;
-    }
-    
-    .card:hover {
-        transform: translateY(-2px);
-    }
-    
-    /* Safety Rating Styles */
+
     .safety-rating {
         font-size: 2rem;
         font-weight: bold;
-        color: #38a169;
+        color: #48bb78;
         display: block;
         text-align: center;
         margin: 1rem 0;
     }
-    
-    /* Badge Styles */
+
     .badge {
         display: inline-block;
         padding: 0.5rem 1rem;
@@ -103,128 +185,250 @@
         text-transform: uppercase;
         letter-spacing: 0.05em;
     }
-    
+
     .badge-low-risk {
-        background-color: #faf089;
-        color: #744210;
+        background-color: #2f855a;
+        color: #e2e8f0;
     }
-    
-    /* Lists */
+
     ul {
         padding-left: 1.5rem;
         margin: 1rem 0;
+        color: #e2e8f0;
     }
-    
+
     li {
         margin-bottom: 0.5rem;
     }
-    
+
     li strong {
-        color: #2c5282;
+        color: #4299e1;
     }
-    
-    /* Consumption Recommendation */
-    .card:last-child {
-        grid-column: 1 / -1;
-        background-color: #ebf8ff;
+
+    /* About, Profile, Plans Pages */
+    .about-content, .profile-content, .plans-content {
+        background: #2d3748;
+        padding: 2rem;
+        border-radius: 10px;
+        margin-top: 2rem;
+        color: #e2e8f0;
     }
-    
-    /* Responsive Design */
+
+    .profile-info strong {
+        color: #4299e1;
+    }
+
+    .plans-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .plan-card {
+        background: #1a202c;
+        padding: 2rem;
+        border-radius: 10px;
+        text-align: center;
+    }
+
     @media (max-width: 768px) {
-        body {
-            padding: 1rem;
+        .header-content {
+            flex-direction: column;
+            gap: 1rem;
         }
-        
-        .analysis-section {
-            grid-template-columns: 1fr;
-        }
-        
-        h1 {
-            font-size: 2rem;
-        }
-        
-        .upload-section {
-            padding: 1.5rem;
-        }
-        
-        input[type="file"] {
-            margin-bottom: 1rem;
-            margin-right: 0;
+
+        .nav-icons {
+            flex-wrap: wrap;
+            justify-content: center;
         }
     }
-</style>
-    </head>
+    </style>
 </head>
 <body>
-    <h1>Food Safety Analyzer</h1>
+    <!-- Rest of the HTML remains the same -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <!-- <img src="C:\\Users\\ankit\\OneDrive\\Documents\\logo.jpg" alt="SafetyCheck Logo"> -->
+            </div>
+            <div class="nav-icons">
+                <a class="nav-icon" onclick="showPage('main')"><i class="fas fa-home"></i> Home</a>
+                <a class="nav-icon" onclick="showPage('profile')"><i class="fas fa-user"></i> Profile</a>
+                <a class="nav-icon" onclick="showPage('about')"><i class="fas fa-info-circle"></i> About Us</a>
+                <a class="nav-icon" onclick="showPage('plans')"><i class="fas fa-crown"></i> Plans</a>
+                <a class="nav-icon" onclick="showPage('login')"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+            </div>
+        </div>
+    </header>
 
-    <div class="upload-section">
-        <h2>Upload Product Image</h2>
-        <input type="file" accept="image/*" id="productImage">
-        <button onclick="analyzeProduct()">Analyze Product</button>
+    <!-- Login Page -->
+    <div id="login" class="page">
+        <form class="auth-form" onsubmit="handleLogin(event)">
+            <h2>Login to SafetyCheck</h2>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+            <p>Don't have an account? <a href="#" onclick="showPage('signup')">Sign up</a></p>
+        </form>
     </div>
 
-    <div class="analysis-section" id="analysisResults" style="display: none;">
-        <div class="card">
-            <h2>Ingredients</h2>
-            <ul>
-                <li>Water</li>
-                <li>Sugar</li>
-                <li>Natural Flavors</li>
-                <li>Citric Acid</li>
-                <li>Sodium Benzoate (Preservative)</li>
-                <li>Caramel Color</li>
-                <li>Phosphoric Acid</li>
-                <li>Caffeine</li>
-            </ul>
+    <!-- Signup Page -->
+    <div id="signup" class="page">
+        <form class="auth-form" onsubmit="handleSignup(event)">
+            <h2>Create Account</h2>
+            <input type="text" placeholder="Full Name" required>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit">Sign Up</button>
+            <p>Already have an account? <a href="#" onclick="showPage('login')">Login</a></p>
+        </form>
+    </div>
+
+    <!-- Main Analysis Page -->
+    <div id="main" class="page">
+        <div class="upload-section">
+            <h2>Upload Product Image</h2>
+            <input type="file" accept="image/*" id="productImage">
+            <button onclick="analyzeProduct()">Analyze Product</button>
         </div>
 
-        <div class="card">
-            <h2>Safety Analysis</h2>
-            <p>Safety Level: <span class="badge badge-low-risk">Low Risk</span></p>
-            <p>Safety Rating: <span class="safety-rating">7.5 / 10</span></p>
-            <h3>Scale:</h3>
-            <ul>
-                <li>Safe: 9.0 - 10.0</li>
-                <li>Low Risk: 7.0 - 8.9</li>
-                <li>Moderate Risk: 5.0 - 6.9</li>
-                <li>High Risk: 0.0 - 4.9</li>
-            </ul>
-        </div>
+        <div class="analysis-section" id="analysisResults" style="display: none;">
+            <div class="card">
+                <h2>Ingredients</h2>
+                <ul>
+                    <li>Water</li>
+                    <li>Sugar</li>
+                    <li>Natural Flavors</li>
+                    <li>Citric Acid</li>
+                    <li>Sodium Benzoate (Preservative)</li>
+                    <li>Caramel Color</li>
+                    <li>Phosphoric Acid</li>
+                    <li>Caffeine</li>
+                </ul>
+            </div>
 
-        <div class="card">
-            <h2>Hazardous Ingredients</h2>
-            <ul>
-                <li><strong>Sodium Benzoate:</strong> Potential allergic reactions</li>
-                <li><strong>Phosphoric Acid:</strong> May weaken bones</li>
-                <li><strong>Caffeine:</strong> Insomnia and anxiety</li>
-            </ul>
-        </div>
+            <div class="card">
+                <h2>Safety Analysis</h2>
+                <p>Safety Level: <span class="badge badge-low-risk">Low Risk</span></p>
+                <p>Safety Rating: <span class="safety-rating">7.5 / 10</span></p>
+                <h3>Scale:</h3>
+                <ul>
+                    <li>Safe: 9.0 - 10.0</li>
+                    <li>Low Risk: 7.0 - 8.9</li>
+                    <li>Moderate Risk: 5.0 - 6.9</li>
+                    <li>High Risk: 0.0 - 4.9</li>
+                </ul>
+            </div>
 
-        <div class="card">
-            <h2>Safety Rating Reasons</h2>
-            <ul>
-                <li>Common food additives</li>
-                <li>Moderate sugar content</li>
-                <li>Presence of caffeine</li>
-                <li>Artificial preservatives used</li>
-                <li>No severe health hazards</li>
-            </ul>
-        </div>
+            <div class="card">
+                <h2>Hazardous Ingredients</h2>
+                <ul>
+                    <li><strong>Sodium Benzoate:</strong> Potential allergic reactions</li>
+                    <li><strong>Phosphoric Acid:</strong> May weaken bones</li>
+                    <li><strong>Caffeine:</strong> Insomnia and anxiety</li>
+                </ul>
+            </div>
 
-        <div class="card" style="grid-column: 1 / -1;">
-            <h2>Consumption Recommendation</h2>
-            <p><strong>Recommended frequency:</strong> 4-6 times per month</p>
-            <p>This recommendation is based on the product's ingredients and safety analysis. Moderation is key to minimizing potential health risks.</p>
+            <div class="card">
+                <h2>Safety Rating Reasons</h2>
+                <ul>
+                    <li>Common food additives</li>
+                    <li>Moderate sugar content</li>
+                    <li>Presence of caffeine</li>
+                    <li>Artificial preservatives used</li>
+                    <li>No severe health hazards</li>
+                </ul>
+            </div>
+
+            <div class="card" style="grid-column: 1 / -1;">
+                <h2>Consumption Recommendation</h2>
+                <p><strong>Recommended frequency:</strong> 4-6 times per month</p>
+                <p>This recommendation is based on the product's ingredients and safety analysis. Moderation is key to minimizing potential health risks.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Page -->
+    <div id="profile" class="page">
+        <div class="profile-content">
+            <h2>User Profile</h2>
+            <div class="profile-info">
+                <p><strong>Name:</strong> John Doe</p>
+                <p><strong>Email:</strong> john@example.com</p>
+                <p><strong>Member Since:</strong> January 2024</p>
+                <button onclick="showEditProfile()">Edit Profile</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page">
+        <div class="about-content">
+            <h2>About SafetyCheck</h2>
+            <p>SafetyCheck is your trusted partner in food and cosmetic safety analysis. Our advanced AI-powered platform helps you make informed decisions about the products you consume and use.</p>
+        </div>
+    </div>
+
+    <!-- Plans Page -->
+    <div id="plans" class="page">
+        <div class="plans-content">
+            <h2>Premium Plans</h2>
+            <div class="plans-grid">
+                <div class="plan-card">
+                    <h3>Basic</h3>
+                    <p>$9.99/month</p>
+                    <button>Select Plan</button>
+                </div>
+                <div class="plan-card">
+                    <h3>Pro</h3>
+                    <p>$19.99/month</p>
+                    <button>Select Plan</button>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
+        // Show initial page (login)
+        window.onload = () => showPage('login');
+
+        // Page navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.style.display = 'none';
+            });
+            
+            // Show selected page
+            const selectedPage = document.getElementById(pageId);
+            if (selectedPage) {
+                selectedPage.style.display = 'block';
+            }
+        }
+
+        // Login handler
+        function handleLogin(event) {
+            event.preventDefault();
+            showPage('main');
+        }
+
+        // Signup handler
+        function handleSignup(event) {
+            event.preventDefault();
+            showPage('main');
+        }
+
+        // Analysis function
         function analyzeProduct() {
-            // Simulate analysis process
             setTimeout(() => {
                 document.getElementById('analysisResults').style.display = 'grid';
             }, 2000);
+        }
+
+        // Profile edit function
+        function showEditProfile() {
+            alert('Edit profile functionality coming soon!');
         }
     </script>
 </body>
